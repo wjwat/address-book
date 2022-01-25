@@ -42,6 +42,11 @@ Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 };
 
+function Address(nickname, location) {
+  this.nickname = nickname;
+  this.location = location;
+}
+
 // User Interface Logic ---------
 let addressBook = new AddressBook();
 
@@ -68,6 +73,10 @@ function showContact(contactId) {
   buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
 }
 
+function insertNewAddressFields() {
+  console.log('hello!')
+}
+
 function attachContactListeners() {
   $("ul#contacts").on("click", "li", function() {
     showContact(this.id);
@@ -77,25 +86,34 @@ function attachContactListeners() {
     $("#show-contact").hide();
     displayContactDetails(addressBook);
   });
+  $('#add-address').on('click', insertNewAddressFields);
 }
 
 $(document).ready(function() {
   attachContactListeners();
-  $("form#new-contact").submit(function(event) {
+  $('form#new-contact').on('submit', function(event) {
     event.preventDefault();
     var inputtedFirstName = $("input#new-first-name").val();
     var inputtedLastName = $("input#new-last-name").val();
     var inputtedPhoneNumber = $("input#new-phone-number").val();
     var emailAddress = $('input#new-email-address').val();
+
+    var addressNickname = $('#address-name').val();
     var physicalAddress = $('textarea#new-physical-address').val();
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-    $("input#new-phone-number").val("");
-    $('input#new-email-address').val('');
-    $('input#new-physical-address').val('');
-    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddress, physicalAddress);
+
+    // Clear form to allow adding multiple contacts to AB.
+    $(this).trigger('reset');
+
+    var newAddress = new Address(addressNickname, physicalAddress);
+    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddress, newAddress);
     console.log(newContact);
+    console.log(Object.keys(newContact));
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
   });
 });
+
+/* <label for="address-name">Nickname for address</label>
+<input type="text"  class="form-control" id="address-name">
+<label for="new-physical-address">Address</label>
+<textarea type="text"  class="form-control" id="new-physical-address"></textarea> */
