@@ -30,22 +30,18 @@ AddressBook.prototype.deleteContact = function(id) {
 };
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber, emailAddress, physicalAddress) {
+function Contact(firstName, lastName, phoneNumber, emailAddress, physicalAddress1, physicalAddress2) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
   this.emailAddress = emailAddress;
-  this.physicalAddress = physicalAddress;
+  this.physicalAddress1 = physicalAddress1;
+  this.physicalAddress2 = physicalAddress2;
 }
 
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 };
-
-function Address(nickname, location) {
-  this.nickname = nickname;
-  this.location = location;
-}
 
 // User Interface Logic ---------
 let addressBook = new AddressBook();
@@ -67,21 +63,16 @@ function showContact(contactId) {
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
   $(".email-address").html(contact.emailAddress);
-  $(".physical-address").html(contact.physicalAddress);
+  $(".physical-address1").html(contact.physicalAddress1);
+  $(".physical-address2").html(contact.physicalAddress2);
+  console.log(typeof contact.physicalAddress2)
+  console.log(typeof contact.physicalAddress2.length)
+  if (!contact.physicalAddress2) {
+    $('.physical-address2').parent().hide();
+  }
   let buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
-}
-
-function insertNewAddressFields() {
-  let counter = 0;  
-  let x = `<div id="address-group${counter}">
-<label for="address-name">Nickname for address</label>
-<input type="text"  class="form-control" id="address-name">
-<label for="new-physical-address">Address</label>
-<textarea type="text"  class="form-control" id="new-physical-address"></textarea>
-</div>`
-  $('#address-group').append(x);
 }
 
 function attachContactListeners() {
@@ -93,7 +84,9 @@ function attachContactListeners() {
     $("#show-contact").hide();
     displayContactDetails(addressBook);
   });
-  $('#add-address').on('click', insertNewAddressFields);
+  $('#add-address').on('click', e => {
+    $('#address-group2').show();
+  });
 }
 
 $(document).ready(function() {
@@ -105,14 +98,14 @@ $(document).ready(function() {
     var inputtedPhoneNumber = $("input#new-phone-number").val();
     var emailAddress = $('input#new-email-address').val();
 
-    var addressNickname = $('#address-name').val();
-    var physicalAddress = $('textarea#new-physical-address').val();
+    var physicalAddress1 = $('textarea#new-physical-address1').val();
+    var physicalAddress2 = $('textarea#new-physical-address2').val();
 
     // Clear form to allow adding multiple contacts to AB.
     $(this).trigger('reset');
+    $('#address-group2').hide();
 
-    var newAddress = new Address(addressNickname, physicalAddress);
-    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddress, newAddress);
+    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddress, physicalAddress1, physicalAddress2);
     console.log(newContact);
     console.log(Object.keys(newContact));
     addressBook.addContact(newContact);
