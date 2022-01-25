@@ -74,7 +74,14 @@ function showContact(contactId) {
 }
 
 function insertNewAddressFields() {
-  console.log('hello!')
+  let counter = 0;  
+  let x = `<div id="address-group${counter}">
+<label for="address-name">Nickname for address</label>
+<input type="text"  class="form-control" id="address-name">
+<label for="new-physical-address">Address</label>
+<textarea type="text"  class="form-control" id="new-physical-address"></textarea>
+</div>`
+  $('#address-group').append(x);
 }
 
 function attachContactListeners() {
@@ -113,7 +120,11 @@ $(document).ready(function() {
   });
 });
 
-/* <label for="address-name">Nickname for address</label>
+/*
+<div id="address-group"+ counter>
+<label for="address-name">Nickname for address</label>
 <input type="text"  class="form-control" id="address-name">
 <label for="new-physical-address">Address</label>
-<textarea type="text"  class="form-control" id="new-physical-address"></textarea> */
+<textarea type="text"  class="form-control" id="new-physical-address"></textarea>
+</div>
+*/
