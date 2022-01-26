@@ -1,7 +1,8 @@
-#show-contact {
-  display: none;
+body {
+  margin: 0 auto;
+  width: 40rem;
 }
 
-#address-group2 {
-  display: none;
+form {
+  width: 100%;
 }
