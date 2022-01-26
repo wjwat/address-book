@@ -1,4 +1,8 @@
-body {
+* {
+  font-family: monospace;
+}
+
+main {
   margin: 0 auto;
   width: 40rem;
 }
@@ -6,3 +10,17 @@ body {
 form {
   width: 100%;
 }
+
+button {
+  margin-top: 5px;
+}
+
+/* #contact-form {
+  width: 45%;
+  float: left;
+}
+
+#contacts-display {
+  width: 45%;
+  float: right;
+} */

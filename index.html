@@ -10,24 +10,51 @@
   <title>My simple address book</title>
 </head>
 <body>
-  <h1>Address Book</h1>
-  <form>
-    <label>First Name
-      <input type='text' name='firstName' value='Will'>
-    </label>
-    <label>Last Name
-      <input type='text' name='lastName' value='Watkins'>
-    </label>
-    <label>Nickname
-      <input type='text' name='nickName' value='wjwat'>
-    </label>
-    <label>Phone Number
-      <input type='text' name='phoneNumber' value='5125555555'>
-    </label>
-    <label>EMail Address
-      <input type='text' name='emailAddress' value='wjwat@onionslice.org'>
-    </label>
-    <button type='button' id='add-contact'>Add Contact!</button>
-  </form>
+  <header>
+    <h1>Address Book</h1>
+  </header>
+  <main>
+    <h1>Address Book</h1>
+    <div id='contact-form'>
+      <form>
+        <label>First Name
+          <input type='text' name='firstName' value='Will'>
+        </label>
+        <label>Last Name
+          <input type='text' name='lastName' value='Watkins'>
+        </label>
+        <label>Nickname
+          <input type='text' name='nickName' value='wjwat'>
+        </label>
+        <label>Phone Number
+          <input type='text' name='phoneNumber' value='5125555555'>
+        </label>
+        <label>Email Address
+          <input type='text' name='emailAddress' value='wjwat@onionslice.org'>
+        </label>
+
+        <fieldset class='addresses'>
+          <legend>Addresses</legend>
+          <div class='address'>
+            <label>Address Nickname
+              <input type='text' name='addressNickname' value='default'>
+            </label>
+            <label>Address
+              <textarea name='address'>123 Chancla Street
+San Marcos, TX 78666</textarea>
+            </label>
+          </div>
+        </fieldset>
+
+        <button type='button' id='add-contact'>Add Contact!</button>
+      </form>
+    </div>
+    <div id='contacts-display'>
+      <ul></ul>
+    </div>
+  </main>
+  <footer>
+    <p>WW</p>
+  </footer>
 </body>
 </html>
